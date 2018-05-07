@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1039360562031",
+    "firebase_url": "https://taxi-4ef4d.firebaseio.com",
+    "project_id": "taxi-4ef4d",
+    "storage_bucket": "taxi-4ef4d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1039360562031:android:be16cbf195588d20",
+        "android_client_info": {
+          "package_name": "com.aniruddhakulkarni.taxi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1039360562031-6g4ur5frcsirvindts2eu9chb6ot9lra.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7JxFLdd5EmBup18AqpO6LS1ImkY1pZ94"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

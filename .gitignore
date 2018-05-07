@@ -1,0 +1,20 @@
+# Created by .ignore support plugin (hsz.mobi)
+.gradle
+.idea/libraries/
+skor-android.iml
+local.properties
+SKOR.iml
+.idea/*
+.gradle/*
+.gradle/2.14.1
+.gradle/3.2
+.idea/misc.xml
+.idea/workspace.xml
+.idea
+app/build
+/local.properties
+app/app.iml
+*.iml
+build
+.DS_Store
+/app/app.iml
