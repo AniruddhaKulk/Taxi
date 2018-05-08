@@ -9,6 +9,7 @@ import android.location.Location;
 import com.aniruddhakulkarni.taxi.common.Common;
 import com.aniruddhakulkarni.taxi.remote.IGoogleAPI;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationListener;
 
 import android.os.Handler;
@@ -34,6 +35,9 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -92,6 +96,7 @@ public class Welcome extends FragmentActivity implements OnMapReadyCallback, Goo
     private PolylineOptions polylineOptions, blackPolylineOptions;
     private Polyline blackPolyline, greyPolyline;
     private IGoogleAPI mService;
+    private PlaceAutocompleteFragment placeAutocomplete;
 
 
     @Override
@@ -105,6 +110,8 @@ public class Welcome extends FragmentActivity implements OnMapReadyCallback, Goo
 
         btnGo = findViewById(R.id.btn_go);
         edLocation = findViewById(R.id.ed_location);
+
+
 
         locationSwitch = findViewById(R.id.location_switch);
         locationSwitch.setOnCheckedChangeListener(new MaterialAnimatedSwitch.OnCheckedChangeListener() {
@@ -135,6 +142,25 @@ public class Welcome extends FragmentActivity implements OnMapReadyCallback, Goo
                 Log.d("TAG", "Destination " + destination);
                 
                 getDirection();
+            }
+        });
+
+        placeAutocomplete = (PlaceAutocompleteFragment) getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
+        placeAutocomplete.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(Place place) {
+                if(locationSwitch.isChecked()){
+                    destination = place.getAddress().toString();
+                    destination = destination.replace(" ", "+");
+                    getDirection();
+                }else {
+                    Toast.makeText(Welcome.this, "Please change status to online", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onError(Status status) {
+                Toast.makeText(Welcome.this, "" + status.toString(), Toast.LENGTH_SHORT).show();
             }
         });
 
