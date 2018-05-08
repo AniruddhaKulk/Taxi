@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+import dmax.dialog.SpotsDialog;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -89,16 +90,24 @@ public class MainActivity extends AppCompatActivity {
         dialog.setPositiveButton("LOGIN", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+                btnSignIn.setEnabled(false);
+
                 final String email = edEmail.getText().toString();
                 final String password = edPassword.getText().toString();
 
                 if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
                     Snackbar.make(rlMain, "Please enter all fields", Snackbar.LENGTH_SHORT).show();
                 }else {
+
+                    final android.app.AlertDialog waitingDialog = new SpotsDialog(MainActivity.this);
+                    waitingDialog.show();
+
                     auth.signInWithEmailAndPassword(email, password)
                             .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                                 @Override
                                 public void onSuccess(AuthResult authResult) {
+                                    waitingDialog.dismiss();
                                     startActivity(new Intent(MainActivity.this, Welcome.class));
                                     finish();
                                 }
@@ -106,7 +115,9 @@ public class MainActivity extends AppCompatActivity {
                             .addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
+                                    waitingDialog.dismiss();
                                     Snackbar.make(rlMain, "Failed to login " + e.getLocalizedMessage(), Snackbar.LENGTH_SHORT).show();
+                                    btnSignIn.setEnabled(true);
                                 }
                             });
                 }
