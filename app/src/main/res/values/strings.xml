@@ -2,4 +2,5 @@
     <string name="app_name">Taxi</string>
     <string name="title_activity_welcome">Map</string>
     <string name="title_activity_maps">Map</string>
+    <string name="google_direction_api">AIzaSyD-xJRWbkx5_TQX9PDM_CbpgvCA43e8dV4</string>
 </resources>
